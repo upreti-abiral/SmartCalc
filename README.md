@@ -1,21 +1,21 @@
-# ⚡ SmartCalc
+# 🧮 Professional Calculator
 
-A modern and user-friendly **Python calculator** that performs basic arithmetic with clean design, error handling, and continuous operation support.  
-This project is part of my coding journey, showcasing structured programming and interactive CLI applications.
+A smart and professional **Python calculator** that goes beyond basic arithmetic.  
+This project demonstrates my ability to build structured, interactive, and error-resistant programs — a step forward from beginner projects like Tic-Tac-Toe and Number Guessing.
 
 ---
 
 ## ✨ Features
-- ➕ Addition  
-- ➖ Subtraction  
-- ✖️ Multiplication  
-- ➗ Division (with **zero-division handling**)  
-- 🔄 Continuous calculations until user exits  
-- ⚠️ Input validation for better user experience  
+- ➕➖✖️➗ **Basic operations**: addition, subtraction, multiplication, division  
+- 🔢 **Advanced operations**: exponents, square roots, percentages  
+- 💾 **Memory functions**: store values, recall them later, clear memory  
+- 📜 **History tracking**: review past calculations during a session  
+- ⚠️ **Robust error handling**: prevents crashes from invalid input or division by zero  
 
 ---
 
-## 🚀 How to Run
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/SmartCalc.git
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/Professional-Calculator.git
