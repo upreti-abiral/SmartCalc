@@ -1,22 +1,12 @@
 import math
-import sys
 
 
 class SmartCalc:
-    """
-    A modern Python calculator with support for:
-    - Basic arithmetic (+, -, *, /)
-    - Advanced operations (sqrt, ^, %)
-    - Memory storage (M+, MR, MC)
-    - History logging
-    """
-
     def __init__(self):
         self.memory = 0
         self.history = []
 
     def add_to_history(self, expression, result):
-        """Save each calculation to history."""
         self.history.append(f"{expression} = {result}")
 
     def add(self, x, y):
@@ -36,7 +26,8 @@ class SmartCalc:
 
     def divide(self, x, y):
         if y == 0:
-            return "❌ Error: Division by zero"
+            return "Error: Division by zero"
+
         result = x / y
         self.add_to_history(f"{x} / {y}", result)
         return result
@@ -48,33 +39,34 @@ class SmartCalc:
 
     def square_root(self, x):
         if x < 0:
-            return "❌ Error: Negative number"
+            return "Error: Cannot find square root of a negative number"
+
         result = math.sqrt(x)
-        self.add_to_history(f"√{x}", result)
+        self.add_to_history(f"sqrt({x})", result)
         return result
 
     def percentage(self, x, y):
-        """Calculate what % y is of x."""
-        result = (x / y) * 100 if y != 0 else "❌ Error: Division by zero"
+        if y == 0:
+            return "Error: Division by zero"
+
+        result = (x / y) * 100
         self.add_to_history(f"{x} is what % of {y}", result)
         return result
 
-    # Memory operations
     def memory_add(self, value):
         self.memory += value
-        return f"💾 Stored {value} in memory."
+        return self.memory
 
     def memory_recall(self):
-        return f"📂 Memory: {self.memory}"
+        return self.memory
 
     def memory_clear(self):
         self.memory = 0
-        return "🗑️ Memory cleared."
 
-    # History
     def show_history(self):
         if not self.history:
-            return "📜 No history yet."
+            return "No history yet."
+
         return "\n".join(self.history)
 
 
@@ -82,17 +74,18 @@ def main():
     calc = SmartCalc()
 
     print("=" * 50)
-    print("⚡ Welcome to SmartCalc ⚡")
+    print("Smart Calculator")
     print("=" * 50)
-    print("Available operations:")
-    print(" +   → Addition")
-    print(" -   → Subtraction")
-    print(" *   → Multiplication")
-    print(" /   → Division")
-    print(" ^   → Exponentiation")
-    print(" sqrt → Square root")
-    print(" %   → Percentage")
-    print("\nMemory: M+, MR, MC")
+    print("Operations:")
+    print("+   Addition")
+    print("-   Subtraction")
+    print("*   Multiplication")
+    print("/   Division")
+    print("^   Exponentiation")
+    print("sqrt Square root")
+    print("%   Percentage")
+    print()
+    print("Memory: M+, MR, MC")
     print("History: H")
     print("Quit: Q")
     print("=" * 50)
@@ -100,64 +93,65 @@ def main():
     while True:
         choice = input("\nEnter operation: ").lower()
 
-        if choice == 'q':
-            print("👋 Thanks for using SmartCalc!")
-            sys.exit()
+        if choice == "q":
+            print("Thanks for using Smart Calculator!")
+            return
 
-        elif choice == 'h':
-            print("\n📜 History:")
+        elif choice == "h":
+            print("\nHistory:")
             print(calc.show_history())
             continue
 
-        elif choice == 'm+':
+        elif choice == "m+":
             try:
-                val = float(input("Enter number to store: "))
-                print(calc.memory_add(val))
+                value = float(input("Enter number to add to memory: "))
+                print("Memory:", calc.memory_add(value))
             except ValueError:
-                print("⚠️ Invalid input.")
+                print("Please enter a valid number.")
             continue
 
-        elif choice == 'mr':
-            print(calc.memory_recall())
+        elif choice == "mr":
+            print("Memory:", calc.memory_recall())
             continue
 
-        elif choice == 'mc':
-            print(calc.memory_clear())
+        elif choice == "mc":
+            calc.memory_clear()
+            print("Memory cleared.")
             continue
 
         try:
-            if choice == 'sqrt':
-                num = float(input("Enter number: "))
-                print("Result:", calc.square_root(num))
+            if choice == "sqrt":
+                number = float(input("Enter number: "))
+                print("Result:", calc.square_root(number))
 
-            elif choice == '^':
-                x = float(input("Enter base: "))
-                y = float(input("Enter exponent: "))
-                print("Result:", calc.power(x, y))
+            elif choice == "^":
+                base = float(input("Enter base: "))
+                exponent = float(input("Enter exponent: "))
+                print("Result:", calc.power(base, exponent))
 
-            elif choice == '%':
-                x = float(input("Enter part: "))
-                y = float(input("Enter whole: "))
-                print("Result:", calc.percentage(x, y), "%")
+            elif choice == "%":
+                part = float(input("Enter part: "))
+                whole = float(input("Enter whole: "))
+                print("Result:", calc.percentage(part, whole), "%")
 
-            elif choice in ['+', '-', '*', '/']:
-                x = float(input("Enter first number: "))
-                y = float(input("Enter second number: "))
+            elif choice in ["+", "-", "*", "/"]:
+                first = float(input("Enter first number: "))
+                second = float(input("Enter second number: "))
 
-                if choice == '+':
-                    print("Result:", calc.add(x, y))
-                elif choice == '-':
-                    print("Result:", calc.subtract(x, y))
-                elif choice == '*':
-                    print("Result:", calc.multiply(x, y))
-                elif choice == '/':
-                    print("Result:", calc.divide(x, y))
+                if choice == "+":
+                    print("Result:", calc.add(first, second))
+                elif choice == "-":
+                    print("Result:", calc.subtract(first, second))
+                elif choice == "*":
+                    print("Result:", calc.multiply(first, second))
+                elif choice == "/":
+                    print("Result:", calc.divide(first, second))
 
             else:
-                print("⚠️ Invalid operation. Try again.")
+                print("Invalid operation. Try again.")
 
         except ValueError:
-            print("⚠️ Please enter valid numbers.")
+            print("Please enter valid numbers.")
 
 
 if __name__ == "__main__":
